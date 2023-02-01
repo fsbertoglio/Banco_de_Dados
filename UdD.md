@@ -12,6 +12,11 @@ O serviço consiste em um sistema de gerenciamento de lojas digitais. Como refer
 - Lojas
     - id
     - nome
+    - email
+    - telefone
+    - cep
+    - rua
+    - numeroEnd
     - idAdministrador
     - ramo
 - Produtos
@@ -32,16 +37,24 @@ O serviço consiste em um sistema de gerenciamento de lojas digitais. Como refer
     - nome
     - email
     - telefone
+    - cep
     - rua
-    - bairro
-    - cidade
-    - numeroCasa
+    - numeroEnd
 
-- Carrinhos de Compras
+- Carrinho
+    - id
+    - idProduto
+    - quantidade
 - Compra
-- Histórico de Compra
-- Compradores
+- Histórico
 - Administradores
+    - id
+    - senha
+    - nome
+    - email
+    - telefone
+    - idLoja
+
 
 
 - 
