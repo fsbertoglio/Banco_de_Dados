@@ -6,7 +6,7 @@
     Objetivo do Sistema E-Commerce
 </h2>
 
-O serviço consiste em um sistema de gerenciamento de lojas digitais que atuam em sistema D2C (Direct to Consumer), onde há uma plataforma com diversos marketplaces individualizados para cada empresa cliente. Como referência para o projeto, adotamos o [Shopify](https://shopify.com/), considerando apenas o gerenciamento das lojas e não sua criação/design.
+O serviço consiste em um sistema de gerenciamento de lojas digitais que atuam em sistema D2C (Direct to Consumer), onde há uma plataforma com diversos marketplaces, individualizados para cada empresa cliente, que não detém responsabilidade pela gestão de estoque, formas de pagamento e entregas, que são geridos pelos administradores de cada loja. Como referência para o projeto, adotamos o [Shopify](https://shopify.com/), considerando apenas o gerenciamento das lojas e não sua criação/design.
 
 
 ![Ilustração D2C](/UdD_images/D2C_image.jfif "Ilustração D2C")
@@ -15,7 +15,7 @@ O serviço consiste em um sistema de gerenciamento de lojas digitais que atuam e
 <br>
 
 - Lojas  
-Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradores criem seus sites de e-commerce. Cada loja possui um endereço eletrônico e tem um `administrador` responsável. As diferentes lojas podem ser acessadas pelos `clientes` cadastrados na plataforma, as `compras` ocorrem mediante inclusão de produtos no `carrinho` e da confirmação da compra.
+Enquanto ferramenta de gestão de lojas, o serviço permite que administradores criem seus sites de e-commerce. Cada loja possui um endereço eletrônico e tem um administrador responsável. As diferentes lojas podem ser acessadas pelos clientes cadastrados na plataforma, as compras ocorrem mediante inclusão de produtos no carrinho e da confirmação da compra.
     - nome
     - link
     - telefone
@@ -28,7 +28,7 @@ Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradore
 <br>
 
 - Produtos  
-Cada produto possuim um identificador próprio, recebe um nome e demais metadatos. Os produtos são inseridos no `estoque` e podem sar adicionados à um `carrinho` pelo cliente no ato de seleção de produtos a serem comprados. O `administrador` responsável pode fazer a criação e exclusão de produtos do sistema.
+Cada produto possuim um identificador próprio, recebe um nome e demais metadatos. Os produtos são inseridos no estoque e podem sar adicionados à um carrinho pelo cliente no ato de seleção de produtos a serem comprados. O administrador responsável pode fazer a criação e exclusão de produtos do sistema.
     - id
     - nome
     - categoria
@@ -43,7 +43,7 @@ Cada produto possuim um identificador próprio, recebe um nome e demais metadato
 <br>
 
 - Estoques  
-Cada loja possui um estoque individual que é composto pelos `produtos` que a mesma comercializa, este apresenta a quantidade de produtos que estão disponíveis, de acordo com o identificador de cada produto. A quantidade de cada produto pode variar através da inclusão ou exclusão pelo `administrador` e pode diminuir através do processo de `compra`, realizado pelo `cliente`.
+Cada loja possui um estoque individual que é composto pelos produtos que a mesma comercializa, este apresenta a quantidade de produtos que estão disponíveis, de acordo com o identificador de cada produto. A quantidade de cada produto pode variar através da inclusão ou exclusão pelo administrador e pode diminuir através do processo de compra, realizado pelo cliente.
     - id
     - idLoja
     - idProduto
@@ -51,7 +51,7 @@ Cada loja possui um estoque individual que é composto pelos `produtos` que a me
 <br>
 
 - Clientes  
-A plataforma possui uma série de clientes. Cada cliente é identificado por um id de usuário, que também é utilizado para realizar login na plataforma, junto com sua senha. Os clientes fazem seu cadastrado junto com outros metadados necessários para identificação e entregas. Os clientes podem filtrar os `produtos` por categoria, ou outro de seus identificadores, e os incluir no carrinho. Clientes podem realizar a compra de produtos. Os clientes podem fazer `avaliações da loja` e `avaliação do produto` após realizar uma `compra`.
+A plataforma possui uma série de clientes. Cada cliente é identificado por um id de usuário, que também é utilizado para realizar login na plataforma, junto com sua senha. Os clientes fazem seu cadastrado junto com outros metadados necessários para identificação e entregas. Os clientes podem filtrar os produtos por categoria, ou outro de seus identificadores, e os incluir no carrinho. Clientes podem realizar a compra de produtos. Os clientes podem fazer avaliações da loja e avaliação do produto após realizar uma compra.
     -  id
     - senha
     - nome
@@ -66,7 +66,7 @@ A plataforma possui uma série de clientes. Cada cliente é identificado por um 
 <br>
 
 - Carrinhos  
-Para realizar uma `compra`, o cliente faz a seleção dos `produtos` e os inclui no carrinho. O cliente pode realizar a inclusão e a exclusão de produtos do carrinho. O carrinho permite a visualização de todos os produtos selecionados e apresenta o valor total a ser pago. Após confirmação, o cliente pode realizar a compra dos produtos que estão no carrinho.
+Para realizar uma compra, o cliente faz a seleção dos produtos e os inclui no carrinho. O cliente pode realizar a inclusão e a exclusão de produtos do carrinho. O carrinho permite a visualização de todos os produtos selecionados e apresenta o valor total a ser pago. Após confirmação, o cliente pode realizar a compra dos produtos que estão no carrinho.
     - id
     - idCliente
     - idProduto
