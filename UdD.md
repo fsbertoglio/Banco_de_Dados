@@ -77,7 +77,7 @@ Para realizar uma `compra`, o cliente faz a seleção dos `produtos` e os inclui
 
 <br>
 
-- Compras
+- Compras  
 Ao efetuar uma compra, a ação gera um registro com informações do cliente e da loja, a identificação do carrinho, que contém a lista de produtos, e as informações de valor, data e hora. Esta informação pode ser acessada tanto pelo cliente quanto pelo Administrador.
     - id
     - idCliente
@@ -90,7 +90,7 @@ Ao efetuar uma compra, a ação gera um registro com informações do cliente e 
 ##### fonte: https://www.techtudo.com.br/
 <br>
 
-- Administradores
+- Administradores  
 Os administradores são usuários da plataforma responsáveis pelas lojas. Eles tem acesso à área de administração de sua loja, onde podem consultar os dados da loja, do caixa da loja, do histórico de compras, gerenciar estoque e gerenciar produtos.
     - id
     - senha
@@ -102,7 +102,7 @@ Os administradores são usuários da plataforma responsáveis pelas lojas. Eles 
 
 <br>
 
-- CaixaLoja
+- CaixaLoja  
 Cada loja tem seu controle de caixa, que permite a organização das entradas de caixa decorrentes das compras. Através do caixa, o administrador pode ver o fluxo financeiro de sua loja.
     - id
     - idLoja
@@ -110,7 +110,7 @@ Cada loja tem seu controle de caixa, que permite a organização das entradas de
 
 <br>
 
-- AvaliacoesLoja
+- AvaliacoesLoja  
 Após cada compra, o cliente pode realizar uma avaliação da loja em que realizou a compra. A avaliação permite a inserção de uma nota e um comentário.
     - id
     - idCliente
@@ -122,7 +122,7 @@ Após cada compra, o cliente pode realizar uma avaliação da loja em que realiz
 
 <br>
 
-- AvaliacoesProduto
+- AvaliacoesProduto  
 Após cada compra, o cliente pode realizar uma avaliação para cada produto que adquiriu. Esta avaliação consiste na atribuição de uma nota e permite que seja incluido um comentário. 
     - id
     - idCliente
