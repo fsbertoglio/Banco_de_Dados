@@ -25,7 +25,7 @@ Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradore
 <br>
 
 - Produtos  
-Cada produto possuim um identificador próprio, recebe um nome e demais metadatos. Os produtos são inseridos no `estoque`e podem sar adicionados à um `carrinho` pelo cliente no ato de seleção de produtos a serem comprados. O `administrador` responsável pode fazer a criação e exclusão de produtos do sistema.
+Cada produto possuim um identificador próprio, recebe um nome e demais metadatos. Os produtos são inseridos no `estoque` e podem sar adicionados à um `carrinho` pelo cliente no ato de seleção de produtos a serem comprados. O `administrador` responsável pode fazer a criação e exclusão de produtos do sistema.
     - id
     - nome
     - categoria
@@ -35,10 +35,13 @@ Cada produto possuim um identificador próprio, recebe um nome e demais metadato
     - cor
     - tamanho
 
+![Ilustração product sourcing](/UdD_images/manage_products.jpg "product_sourcing")
+##### fonte: https://www.shopify.com/br/blog/apps-dropshipping 
+
 <br>
 
 - Estoques  
-Cada loja possui um estoque que é composto pelos `produtos` que comercializa, apresentando a quantidade de produtos que estão disponíveis. A quantidade de cada produto pode variar através da inclusão ou exclusão pelo `administrador` e pode diminuir através do processo de `compra`, realizado pelo `cliente`.
+Cada loja possui um estoque individual que é composto pelos `produtos` que a mesma comercializa, este apresenta a quantidade de produtos que estão disponíveis, de acordo com o identificador de cada produto. A quantidade de cada produto pode variar através da inclusão ou exclusão pelo `administrador` e pode diminuir através do processo de `compra`, realizado pelo `cliente`.
     - id
     - idLoja
     - idProduto
