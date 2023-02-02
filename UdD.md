@@ -11,15 +11,15 @@ O serviço consiste em um sistema de gerenciamento de lojas digitais. Como refer
 
 - Lojas  
 Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradores criem seus sites de e-commerce. Cada loja possui um endereço eletrônico e tem um `administrador` responsável. As diferentes lojas podem ser acessadas pelos `clientes` cadastrados na plataforma, as `compras` ocorrem mediante inclusão de produtos no `carrinho` e da confirmação da compra.
-    - id
     - nome
     - link
     - telefone
     - idAdministrador
     - ramo  
+<br>
 
-- Produtos
-
+- Produtos  
+Cada produto possuim um identificador próprio, recebe um nome e demais metadatos. Os produtos são inseridos no `estoque`e podem sar adicionados à um `carrinho` pelo cliente no ato de seleção de produtos a serem comprados. O `administrador` responsável pode fazer a criação e exclusão de produtos do sistema.
     - id
     - nome
     - categoria
@@ -28,12 +28,18 @@ Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradore
     - descricao
     - cor
     - tamanho
-- Estoques
+<br>
+
+- Estoques  
+Cada loja possui um estoque que é composto pelos `produtos` que comercializa, apresentando a quantidade de produtos que estão disponíveis. A quantidade de cada produto pode variar através da inclusão ou exclusão pelo `administrador` e pode diminuir através do processo de `compra`, realizado pelo `cliente`.
     - id
+    - idLoja
     - idProduto
     - quantidade
+<br>
+
 - Clientes
-    - id
+    -  id
     - senha
     - nome
     - email
@@ -41,12 +47,16 @@ Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradore
     - cep
     - rua
     - numeroEnd
+<br>
+
 - Carrinhos
     - id
     - idCliente
     - idProduto
     - valorProduto
     - quantidade
+<br>
+
 - Compras
     - id
     - idCliente
@@ -55,22 +65,30 @@ Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradore
     - valor
     - hora
     - data
+<br>
+
 - Administradores
     - id
     - senha
     - nome
     - email
     - telefone
+<br>
+
 - CaixaLoja
     - id
     - idLoja
     - idCompra
+<br>
+
 - AvaliacoesLoja
     - id
     - idCliente
     - idLoja
     - nota
     - comentario
+<br>
+
 - AvaliacoesProduto
     - id
     - idCliente
@@ -78,5 +96,3 @@ Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradore
     - nota
     - comentario
 
-
-- 
