@@ -6,8 +6,12 @@
     Objetivo do Sistema E-Commerce
 </h2>
 
-O serviço consiste em um sistema de gerenciamento de lojas digitais. Como referência para o projeto, adotamos o [Shopify](https://shopify.com/), considerando apenas o gerenciamento das lojas e não sua criação.
+O serviço consiste em um sistema de gerenciamento de lojas digitais que atuam em sistema D2C (Direct to Consumer), onde há uma plataforma com diversos marketplaces individualizados para cada empresa cliente. Como referência para o projeto, adotamos o [Shopify](https://shopify.com/), considerando apenas o gerenciamento das lojas e não sua criação/design.
 
+
+![Ilustração D2C](/UdD_images\D2C_image.jfif "Ilustração D2C")
+
+##### fonte: https://www.linkedin.com/pulse/so-what-d2c-exactly-gagandeep-singh/ 
 
 - Lojas  
 Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradores criem seus sites de e-commerce. Cada loja possui um endereço eletrônico e tem um `administrador` responsável. As diferentes lojas podem ser acessadas pelos `clientes` cadastrados na plataforma, as `compras` ocorrem mediante inclusão de produtos no `carrinho` e da confirmação da compra.
