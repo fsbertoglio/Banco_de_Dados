@@ -96,7 +96,7 @@ Os administradores são usuários da plataforma responsáveis pelas lojas. Eles 
     - senha
     - nome
     - email
-    - telefone
+    - telefone  
 ![ilustração area do administrador](/UdD_images/administrador.png "area_do_administrador")
 ##### fonte: https://www.jivochat.com.br/
 
