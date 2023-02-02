@@ -9,7 +9,7 @@
 O serviço consiste em um sistema de gerenciamento de lojas digitais que atuam em sistema D2C (Direct to Consumer), onde há uma plataforma com diversos marketplaces individualizados para cada empresa cliente. Como referência para o projeto, adotamos o [Shopify](https://shopify.com/), considerando apenas o gerenciamento das lojas e não sua criação/design.
 
 
-![Ilustração D2C](/UdD_images\D2C_image.jfif "Ilustração D2C")
+![Ilustração D2C](/UdD_images/D2C_image.jfif "Ilustração D2C")
 
 ##### fonte: https://www.linkedin.com/pulse/so-what-d2c-exactly-gagandeep-singh/ 
 
