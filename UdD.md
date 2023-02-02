@@ -9,7 +9,7 @@
 O serviço consiste em um sistema de gerenciamento de lojas digitais. Como referência para o projeto, adotamos o [Shopify](https://shopify.com/), considerando apenas o gerenciamento das lojas e não sua criação.
 
 
-- Lojas  
+- **Lojas**  
 Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradores criem seus sites de e-commerce. Cada loja possui um endereço eletrônico e tem um `administrador` responsável. As diferentes lojas podem ser acessadas pelos `clientes` cadastrados na plataforma, as `compras` ocorrem mediante inclusão de produtos no `carrinho` e da confirmação da compra.
     - nome
     - link
@@ -18,7 +18,7 @@ Enquanto ferramenta de gestão de `lojas`, o serviço permite que administradore
     - ramo  
 <br>
 
-- Produtos  
+- **Produtos**  
 Cada produto possuim um identificador próprio, recebe um nome e demais metadatos. Os produtos são inseridos no `estoque`e podem sar adicionados à um `carrinho` pelo cliente no ato de seleção de produtos a serem comprados. O `administrador` responsável pode fazer a criação e exclusão de produtos do sistema.
     - id
     - nome
@@ -30,7 +30,7 @@ Cada produto possuim um identificador próprio, recebe um nome e demais metadato
     - tamanho
 <br>
 
-- Estoques  
+- **Estoques**  
 Cada loja possui um estoque que é composto pelos `produtos` que comercializa, apresentando a quantidade de produtos que estão disponíveis. A quantidade de cada produto pode variar através da inclusão ou exclusão pelo `administrador` e pode diminuir através do processo de `compra`, realizado pelo `cliente`.
     - id
     - idLoja
