@@ -91,15 +91,19 @@ Ao efetuar uma compra, a ação gera um registro com informações do cliente e 
 <br>
 
 - Administradores
+Os administradores são usuários da plataforma responsáveis pelas lojas. Eles tem acesso à área de administração de sua loja, onde podem consultar os dados da loja, do caixa da loja, do histórico de compras, gerenciar estoque e gerenciar produtos.
     - id
     - senha
     - nome
     - email
     - telefone
-    
+![ilustração area do administrador](/UdD_images/administrador.png "area_do_administrador")
+##### fonte: https://www.jivochat.com.br/
+
 <br>
 
 - CaixaLoja
+Cada loja tem seu controle de caixa, que permite a organização das entradas de caixa decorrentes das compras. Através do caixa, o administrador pode ver o fluxo financeiro de sua loja.
     - id
     - idLoja
     - idCompra
@@ -107,6 +111,7 @@ Ao efetuar uma compra, a ação gera um registro com informações do cliente e 
 <br>
 
 - AvaliacoesLoja
+Após cada compra, o cliente pode realizar uma avaliação da loja em que realizou a compra. A avaliação permite a inserção de uma nota e um comentário.
     - id
     - idCliente
     - idLoja
@@ -118,6 +123,7 @@ Ao efetuar uma compra, a ação gera um registro com informações do cliente e 
 <br>
 
 - AvaliacoesProduto
+Após cada compra, o cliente pode realizar uma avaliação para cada produto que adquiriu. Esta avaliação consiste na atribuição de uma nota e permite que seja incluido um comentário. 
     - id
     - idCliente
     - idLoja
