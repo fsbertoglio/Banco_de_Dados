@@ -1,0 +1,124 @@
+<h1> 
+    Universo do Discurso
+</h1>
+
+<h2>
+    Objetivo do Sistema E-Commerce
+</h2>
+
+<p>O serviço consiste em um sistema de gerenciamento de lojas digitais que atuam em sistema D2C (Direct to Consumer), onde há uma plataforma com diversos marketplaces individualizados para cada empresa cliente. Como referência para o projeto, adotamos o <a href="https://shopify.com/">Shopify</a>, considerando apenas o gerenciamento das lojas e não sua criação/design.</p>
+<p><img src="/UdD_images/D2C_image.jfif" alt="Ilustração D2C" title="Ilustração D2C"></p>
+<h5 id="fonte-https-www-linkedin-com-pulse-so-what-d2c-exactly-gagandeep-singh-">fonte: <a href="https://www.linkedin.com/pulse/so-what-d2c-exactly-gagandeep-singh/">https://www.linkedin.com/pulse/so-what-d2c-exactly-gagandeep-singh/</a></h5>
+<p><br></p>
+<ul>
+<li>Lojas<br>Enquanto ferramenta de gestão de <code>lojas</code>, o serviço permite que administradores criem seus sites de e-commerce. Cada loja possui um endereço eletrônico e tem um <code>administrador</code> responsável. As diferentes lojas podem ser acessadas pelos <code>clientes</code> cadastrados na plataforma, as <code>compras</code> ocorrem mediante inclusão de produtos no <code>carrinho</code> e da confirmação da compra.<ul>
+<li>nome</li>
+<li>link</li>
+<li>telefone</li>
+<li>idAdministrador</li>
+<li>ramo  </li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Produtos<br>Cada produto possuim um identificador próprio, recebe um nome e demais metadatos. Os produtos são inseridos no <code>estoque</code> e podem sar adicionados à um <code>carrinho</code> pelo cliente no ato de seleção de produtos a serem comprados. O <code>administrador</code> responsável pode fazer a criação e exclusão de produtos do sistema.<ul>
+<li>id</li>
+<li>nome</li>
+<li>categoria</li>
+<li>valor</li>
+<li>quantEstoque</li>
+<li>descricao</li>
+<li>cor</li>
+<li>tamanho</li>
+</ul>
+</li>
+</ul>
+<p><img src="/UdD_images/manage_products.jpg" alt="Ilustração product sourcing" title="product_sourcing"></p>
+<h5 id="fonte-https-www-shopify-com-br-blog-apps-dropshipping">fonte: <a href="https://www.shopify.com/br/blog/apps-dropshipping">https://www.shopify.com/br/blog/apps-dropshipping</a></h5>
+<p><br></p>
+<ul>
+<li>Estoques<br>Cada loja possui um estoque individual que é composto pelos <code>produtos</code> que a mesma comercializa, este apresenta a quantidade de produtos que estão disponíveis, de acordo com o identificador de cada produto. A quantidade de cada produto pode variar através da inclusão ou exclusão pelo <code>administrador</code> e pode diminuir através do processo de <code>compra</code>, realizado pelo <code>cliente</code>.<ul>
+<li>id</li>
+<li>idLoja</li>
+<li>idProduto</li>
+<li>quantidade</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Clientes<br>A plataforma possui uma série de clientes. Cada cliente é identificado por um id de usuário, que também é utilizado para realizar login na plataforma, junto com sua senha. Os clientes Estão cadastrados junto com outros metadados necessários para identificação e entregas. Os clientes podem filtrar os <code>produtos</code> por categoria, ou outro de seus identificadores, e os incluir no carrinho. Clientes podem realizar a compra de produtos. Os clientes podem fazer <code>avaliações da loja</code> e <code>avaliação do produto</code> após realizar uma <code>compra</code>.<ul>
+<li>id</li>
+<li>senha</li>
+<li>nome</li>
+<li>email</li>
+<li>telefone</li>
+<li>cep</li>
+<li>rua</li>
+<li>numeroEnd</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><p>Carrinhos<br>Para realizar uma <code>compra</code>, o cliente faz a seleção dos <code>produtos</code> e os inclui no carrinho. O cliente pode realizar a inclusão e a exclusão de produtos do carrinho. O carrinho permite a visualização de todos os produtos selecionados e apresenta o valor total a ser pago. Após confirmação, o cliente pode realizar a compra dos produtos que estão no carrinho.</p>
+<ul>
+<li>id</li>
+<li>idCliente</li>
+<li>idProduto</li>
+<li>valorProduto</li>
+<li>quantidade
+<br></li>
+</ul>
+</li>
+<li><p>Compras</p>
+<ul>
+<li>id</li>
+<li>idCliente</li>
+<li>idLoja</li>
+<li>idCarrinho</li>
+<li>valor</li>
+<li>hora</li>
+<li>data
+<br></li>
+</ul>
+</li>
+<li><p>Administradores</p>
+<ul>
+<li>id</li>
+<li>senha</li>
+<li>nome</li>
+<li>email</li>
+<li>telefone
+<br></li>
+</ul>
+</li>
+<li><p>CaixaLoja</p>
+<ul>
+<li>id</li>
+<li>idLoja</li>
+<li>idCompra
+<br></li>
+</ul>
+</li>
+<li><p>AvaliacoesLoja</p>
+<ul>
+<li>id</li>
+<li>idCliente</li>
+<li>idLoja</li>
+<li>nota</li>
+<li>comentario
+<br></li>
+</ul>
+</li>
+<li><p>AvaliacoesProduto</p>
+<ul>
+<li>id</li>
+<li>idCliente</li>
+<li>idLoja</li>
+<li>nota</li>
+<li>comentario</li>
+</ul>
+</li>
+</ul>
