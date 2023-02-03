@@ -71,7 +71,7 @@ Para realizar uma compra, o cliente faz a seleção dos produtos e os inclui no 
     - idCliente
     - idProduto
     - valorProduto
-    - quantidade  
+    - quantidade
 ![Ilustração carrinho de compras](/UdD_images/carrinho.png "carrinho_clientes")
 ##### fonte: https://www.lojadocafe.com.br/checkout
 
