@@ -16,6 +16,7 @@ O serviço consiste em um sistema de gerenciamento de lojas digitais que atuam e
 
 - Lojas  
 Enquanto ferramenta de gestão de lojas, o serviço permite que administradores criem seus sites de e-commerce. Cada loja possui um endereço eletrônico e tem um administrador responsável. As diferentes lojas podem ser acessadas pelos clientes cadastrados na plataforma, as compras ocorrem mediante inclusão de produtos no carrinho e da confirmação da compra.
+    - id
     - nome
     - link
     - telefone
@@ -52,7 +53,7 @@ Cada loja possui um estoque individual que é composto pelos produtos que a mesm
 
 - Clientes  
 A plataforma possui uma série de clientes. Cada cliente é identificado por um id de usuário, que também é utilizado para realizar login na plataforma, junto com sua senha. Os clientes fazem seu cadastrado junto com outros metadados necessários para identificação e entregas. Os clientes podem filtrar os produtos por categoria, ou outro de seus identificadores, e os incluir no carrinho. Clientes podem realizar a compra de produtos. Os clientes podem fazer avaliações da loja e avaliação do produto após realizar uma compra.
-    -  id
+    - id
     - senha
     - nome
     - email
@@ -69,6 +70,11 @@ A plataforma possui uma série de clientes. Cada cliente é identificado por um 
 Para realizar uma compra, o cliente faz a seleção dos produtos e os inclui no carrinho. O cliente pode realizar a inclusão e a exclusão de produtos do carrinho. O carrinho permite a visualização de todos os produtos selecionados e apresenta o valor total a ser pago. Após confirmação, o cliente pode realizar a compra dos produtos que estão no carrinho.
     - id
     - idCliente
+    - idLoja
+    
+- Carrinho_produto
+    - id
+    - idCarrinho
     - idProduto
     - valorProduto
     - quantidade
@@ -83,11 +89,26 @@ Ao efetuar uma compra, a ação gera um registro com informações do cliente e 
     - idCliente
     - idLoja
     - idCarrinho
+    - idPagamento
     - valor
     - hora
     - data  
 ![Ilustração histórico de compras](/UdD_images/compras.png "compras")
 ##### fonte: https://www.techtudo.com.br/
+<br>
+
+- Pagamento  
+Cada compra efetuada necessita de um pagamneto aprovado para ser concluída. Ao efetuar uma compra, um pagamento é criado junto com suas informações de valor, método, parcelas e horário. É possível encontrar uma compra a partir de seu pagamento.
+    - id
+    - idCompra
+    - valorCompra
+    - status
+    - metodo
+    - parcelas
+    - valor
+    - hora
+    - data  
+    
 <br>
 
 - Administradores  
