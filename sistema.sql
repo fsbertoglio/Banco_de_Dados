@@ -1,17 +1,3 @@
-
-
--- drop table if exists Administradores;
--- drop table if exists Clientes;
--- drop table if exists Lojas;
--- drop table if exists Produtos;
--- drop table if exists Estoques;
--- drop table if exists Carrinhos;
--- drop table if exists Compras;
--- drop table if exists Pagamentos;
--- drop table if exists Metodos;
-
-
-
 CREATE TABLE Administradores
 (
     id INTEGER NOT NULL,
@@ -147,7 +133,3 @@ CREATE TABLE AvaliacoesProduto
     FOREIGN KEY(idProduto, idLojaProduto) REFERENCES Produtos(id, idLoja),
     PRIMARY KEY(idCliente, idLojaProduto, idProduto)
 ) INHERITS(Avaliacoes);
-
-
--- Necessario criar tabela de relação n-n entre estoque_produto
--- Necessário criar tabela de relação n-n entre produto-carrinho
