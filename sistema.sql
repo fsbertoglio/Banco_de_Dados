@@ -3,9 +3,9 @@
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 
-CREATE TABLE Administradores
+CREATE TABLE Usuarios
 (
-    id INTEGER NOT NULL,
+        id INTEGER NOT NULL,
     senha VARCHAR(20) NOT NULL,
     nome VARCHAR(60) NOT NULL,
     email VARCHAR(60) NOT NULL,
@@ -13,18 +13,19 @@ CREATE TABLE Administradores
     PRIMARY KEY(id)
 );
 
+CREATE TABLE Administradores
+(
+    cnpj VARCHAR(20) NOT NULL,
+    PRIMARY KEY(id)
+) INHERITS(Usuarios);
+
 CREATE TABLE Clientes
 (
-    id INTEGER NOT NULL,
-    senha VARCHAR(20) NOT NULL,
-    nome VARCHAR(60) NOT NULL,
-    email VARCHAR(60) NOT NULL,
-    telefone VARCHAR(20),
     cep VARCHAR(10),
     rua VARCHAR(60) NOT NULL,
     numeroEnd INTEGER NOT NULL,
     PRIMARY KEY(id)
-);
+) INHERITS(Usuarios);
 
 CREATE TABLE Lojas
 (
@@ -97,13 +98,14 @@ CREATE TABLE Metodos
 
 CREATE TABLE Pagamentos
 (
+    idCompra INTEGER NOT NULL,
     foiConfirmado BOOLEAN NOT NULL,
     idMetodo INTEGER NOT NULL,
     dataHoraPagamento TIMESTAMP NOT NULL,
-    FOREIGN KEY(id) REFERENCES Compras(id),
+    FOREIGN KEY(idCompra) REFERENCES Compras(id),
     FOREIGN KEY (idMetodo) REFERENCES Metodos(id),
-    PRIMARY KEY(id)
-) INHERITS(Compras);
+    PRIMARY KEY(idCompra)
+);
 
 CREATE TABLE Avaliacoes
 (
