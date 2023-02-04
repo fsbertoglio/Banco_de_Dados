@@ -1,4 +1,17 @@
 
+
+-- drop table if exists Administradores;
+-- drop table if exists Clientes;
+-- drop table if exists Lojas;
+-- drop table if exists Produtos;
+-- drop table if exists Estoques;
+-- drop table if exists Carrinhos;
+-- drop table if exists Compras;
+-- drop table if exists Pagamentos;
+-- drop table if exists Metodos;
+
+
+
 CREATE TABLE Administradores
 (
     id INTEGER NOT NULL,
@@ -57,26 +70,21 @@ CREATE TABLE Estoques
 
 CREATE TABLE Carrinhos
 (
-    idLoja INTEGER NOT NULL,
+    id INTEGER NOT NULL,
     idCliente INTEGER NOT NULL,
-    dataHora TIMESTAMP NOT NULL,
+    idLoja INTEGER NOT NULL,
     FOREIGN KEY(idLoja) REFERENCES Lojas(id),
     FOREIGN KEY(idCliente) REFERENCES Clientes(id),
-    PRIMARY KEY(idLoja, idCliente, dataHora)
+    PRIMARY KEY(id)
 );
  
 CREATE TABLE Compras
 (
     dataHora TIMESTAMP NOT NULL,
-    valor FLOAT NOT NULL
+    valor FLOAT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(id) REFERENCES Carrinhos(id)
 ) INHERITS(Carrinhos);
-
-CREATE TABLE Pagamentos
-(
-    foiConfirmado BOOLEAN NOT NULL,
-    idMetodo INTEGER NOT NULL,
-    dataHoraPagamento TIMESTAMP NOT NULL
-) INHERITS(Compras);
 
 CREATE TABLE Metodos
 (
@@ -85,7 +93,40 @@ CREATE TABLE Metodos
     parcelas INTEGER NOT NULL,
     PRIMARY KEY(id)
 );
- 
+
+CREATE TABLE Pagamentos
+(
+    foiConfirmado BOOLEAN NOT NULL,
+    idMetodo INTEGER NOT NULL,
+    dataHoraPagamento TIMESTAMP NOT NULL,
+    FOREIGN KEY(id) REFERENCES Compras(id),
+    FOREIGN KEY (idMetodo) REFERENCES Metodos(id),
+    PRIMARY KEY(id)
+) INHERITS(Compras);
+
+CREATE TABLE Avaliacoes
+(
+    idCliente INTEGER NOT NULL,
+    nota INTEGER NOT NULL,
+    comentario TEXT,
+    FOREIGN KEY(idCliente) REFERENCES Clientes(id),
+    PRIMARY KEY (idCliente)
+);
+
+CREATE TABLE AvaliacoesLoja
+(
+    idLoja INTEGER NOT NULL,
+    FOREIGN KEY(idLoja) REFERENCES Lojas(id),
+    PRIMARY KEY(idCliente, idLoja)
+) INHERITS(Avaliacoes);
+
+CREATE TABLE AvaliacoesProduto
+(
+    idLojaProduto INTEGER NOT NULL,
+    idProduto INTEGER NOT NULL,
+    FOREIGN KEY(idProduto, idLojaProduto) REFERENCES Produtos(id, idLoja),
+    PRIMARY KEY(idCliente, idLojaProduto, idProduto)
+) INHERITS(Avaliacoes);
 
 
 -- Necessario criar tabela de relação n-n entre estoque_produto
