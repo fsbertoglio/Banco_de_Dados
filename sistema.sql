@@ -92,7 +92,7 @@ CREATE TABLE Metodos
 (
     id INTEGER NOT NULL,
     nome VARCHAR(20) NOT NULL,
-    parcelas INTEGER NOT NULL,
+    parcelas INTEGER,
     PRIMARY KEY(id)
 );
 
@@ -101,7 +101,7 @@ CREATE TABLE Pagamentos
     idCompra INTEGER NOT NULL,
     foiConfirmado BOOLEAN NOT NULL,
     idMetodo INTEGER NOT NULL,
-    dataHoraPagamento TIMESTAMP NOT NULL,
+    dataHora TIMESTAMP,
     FOREIGN KEY(idCompra) REFERENCES Compras(id),
     FOREIGN KEY (idMetodo) REFERENCES Metodos(id),
     PRIMARY KEY(idCompra)
