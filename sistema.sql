@@ -1,3 +1,8 @@
+-- !
+
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
 CREATE TABLE Administradores
 (
     id INTEGER NOT NULL,
@@ -27,10 +32,16 @@ CREATE TABLE Lojas
     nome VARCHAR(60) NOT NULL,
     link VARCHAR(60) NOT NULL,
     telefone VARCHAR(15) NOT NULL,
-    idAdministrador INTEGER NOT NULL,
     ramo VARCHAR(20) NOT NULL,
-    FOREIGN KEY (idAdministrador) REFERENCES Administradores(id),
     PRIMARY KEY (id)
+);
+
+CREATE TABLE Administradores_Lojas -- TABELA DE RELAÇÂO N:N
+(
+    idAdministrador INTEGER NOT NULL,
+    idLoja INTEGER NOT NULL,
+    FOREIGN KEY (idAdministrador) REFERENCES Administradores(id),
+    FOREIGN KEY (idLoja) REFERENCES Lojas(id)
 );
 
 CREATE TABLE Produtos
@@ -38,6 +49,7 @@ CREATE TABLE Produtos
     id INTEGER NOT NULL,
     idLoja INTEGER NOT NULL,
     nome VARCHAR(20) NOT NULL,
+    quantidade INTEGER NOT NULL,
     categoria VARCHAR(20) NOT NULL,
     valor FLOAT NOT NULL,
     descricao TEXT NOT NULL,
@@ -45,23 +57,6 @@ CREATE TABLE Produtos
     tamanho VARCHAR(20),
     FOREIGN KEY(idLoja) REFERENCES Lojas(id),
     PRIMARY KEY (id, idLoja)
-);
-
-CREATE TABLE Estoques
-(
-    idLoja INTEGER NOT NULL,
-    FOREIGN KEY(idLoja) REFERENCES Lojas(id),
-    PRIMARY KEY (idLoja)
-);
-
-CREATE TABLE Produtos_Estoque -- TABELA DE RELAÇÂO N:N
-(
-    idLoja INTEGER NOT NULL,
-    idProduto INTEGER NOT NULL,
-    quantidade INTEGER NOT NULL,
-    FOREIGN KEY(idLoja) REFERENCES Estoques(idLoja),
-    FOREIGN KEY(idLoja, idProduto) REFERENCES Produtos(idLoja, id) -- INCLUI UMA DUPLA REFERENCIA
-    -- SE NÂO FUNCIONAR A REFERENCIA DUPLA, PROCISAMOS COLOCAR OUTRO ATRIBUTO idLojaProduto
 );
 
 CREATE TABLE Carrinhos
