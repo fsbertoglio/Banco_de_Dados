@@ -68,6 +68,16 @@ CREATE TABLE Estoques
     PRIMARY KEY (idLoja)
 );
 
+CREATE TABLE Produtos_Estoque -- TABELA DE RELAÇÂO N:N
+(
+    idLoja INTEGER NOT NULL,
+    idProduto INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY(idLoja) REFERENCES Estoques(idLoja),
+    FOREIGN KEY(idLoja, idProduto) REFERENCES Produtos(idLoja, id) -- INCLUI UMA DUPLA REFERENCIA
+    -- SE NÂO FUNCIONAR A REFERENCIA DUPLA, PROCISAMOS COLOCAR OUTRO ATRIBUTO idLojaProduto
+);
+
 CREATE TABLE Carrinhos
 (
     id INTEGER NOT NULL,
@@ -76,6 +86,16 @@ CREATE TABLE Carrinhos
     FOREIGN KEY(idLoja) REFERENCES Lojas(id),
     FOREIGN KEY(idCliente) REFERENCES Clientes(id),
     PRIMARY KEY(id)
+);
+
+CREATE TABLE Produtos_Carrinho -- TABELA DE RELAÇÂO N:N
+(
+    idCarrinho INTEGER NOT NULL,
+    idProduto INTEGER NOT NULL,
+    idLoja INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY(idCarrinho) REFERENCES Carrinhos(id),
+    FOREIGN KEY(idLoja, idProduto) REFERENCES Produtos(idLoja, id)
 );
  
 CREATE TABLE Compras
