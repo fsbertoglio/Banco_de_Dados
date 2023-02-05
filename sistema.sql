@@ -1,132 +1,157 @@
 -- !
-
 DROP SCHEMA public CASCADE;
+
 CREATE SCHEMA public;
 
-CREATE TABLE Usuarios
-(
-        id INTEGER NOT NULL,
-    senha VARCHAR(20) NOT NULL,
+CREATE TABLE
+  Usuarios (
+    idUser INTEGER NOT NULL,
+    senha CHAR(32) NOT NULL,
     nome VARCHAR(60) NOT NULL,
     email VARCHAR(60) NOT NULL,
     telefone VARCHAR(20),
-    PRIMARY KEY(id)
-);
+    PRIMARY KEY (idUser)
+  );
 
-CREATE TABLE Administradores
-(
-    cnpj VARCHAR(20) NOT NULL,
-    PRIMARY KEY(id)
-) INHERITS(Usuarios);
+CREATE TABLE
+  Administradores (
+    cnpj char(14) NOT NULL,
+    PRIMARY KEY (idUser)
+  ) INHERITS (Usuarios);
 
-CREATE TABLE Clientes
-(
-    cep VARCHAR(10),
+CREATE TABLE
+  Clientes (
+    cep CHAR(8) NOT NULL,
     rua VARCHAR(60) NOT NULL,
-    numeroEnd INTEGER NOT NULL,
-    PRIMARY KEY(id)
-) INHERITS(Usuarios);
+    numeroEnd SMALLINT NOT NULL,
+    PRIMARY KEY (idUser)
+  ) INHERITS (Usuarios);
 
-CREATE TABLE Lojas
-(
-    id INTEGER NOT NULL,
-    nome VARCHAR(60) NOT NULL,
-    link VARCHAR(60) NOT NULL,
-    telefone VARCHAR(15) NOT NULL,
+CREATE TABLE
+  Lojas (
+    idLoja INTEGER NOT NULL,
+    nome VARCHAR(60) NOT NULL UNIQUE,
+    link VARCHAR(60) NOT NULL UNIQUE,
+    telefone VARCHAR(11),
     ramo VARCHAR(20) NOT NULL,
-    PRIMARY KEY (id)
-);
+    PRIMARY KEY (idLoja)
+  );
 
-CREATE TABLE Administradores_Lojas -- TABELA DE RELAÇÂO N:N
-(
+CREATE TABLE
+  Administradores_Lojas -- TABELA DE RELAÇÂO N:N
+  (
     idAdministrador INTEGER NOT NULL,
     idLoja INTEGER NOT NULL,
-    FOREIGN KEY (idAdministrador) REFERENCES Administradores(id),
-    FOREIGN KEY (idLoja) REFERENCES Lojas(id)
-);
+    FOREIGN KEY (idAdministrador) REFERENCES Administradores (idUser),
+    FOREIGN KEY (idLoja) REFERENCES Lojas (idLoja)
+  );
 
-CREATE TABLE Produtos
-(
-    id INTEGER NOT NULL,
+CREATE TABLE
+  Produtos (
+    idProduto INTEGER NOT NULL,
     idLoja INTEGER NOT NULL,
-    nome VARCHAR(20) NOT NULL,
+    nome VARCHAR(20) NOT NULL UNIQUE,
     quantidade INTEGER NOT NULL,
     categoria VARCHAR(20) NOT NULL,
     valor FLOAT NOT NULL,
     descricao TEXT NOT NULL,
     cor VARCHAR(20),
     tamanho VARCHAR(20),
-    FOREIGN KEY(idLoja) REFERENCES Lojas(id),
-    PRIMARY KEY (id, idLoja)
-);
+    FOREIGN KEY (idLoja) REFERENCES Lojas (idLoja),
+    PRIMARY KEY (idProduto, idLoja)
+  );
 
-CREATE TABLE Carrinhos
-(
-    id INTEGER NOT NULL,
+CREATE TABLE
+  Carrinhos (
+    idCarrinho INTEGER NOT NULL,
     idCliente INTEGER NOT NULL,
     idLoja INTEGER NOT NULL,
-    FOREIGN KEY(idLoja) REFERENCES Lojas(id),
-    FOREIGN KEY(idCliente) REFERENCES Clientes(id),
-    PRIMARY KEY(id)
-);
+    FOREIGN KEY (idLoja) REFERENCES Lojas (idLoja),
+    FOREIGN KEY (idCliente) REFERENCES Clientes (idUser),
+    PRIMARY KEY (idCarrinho)
+  );
 
-CREATE TABLE Produtos_Carrinho -- TABELA DE RELAÇÂO N:N
-(
+CREATE TABLE
+  Produtos_Carrinho -- TABELA DE RELAÇÂO N:N
+  (
     idCarrinho INTEGER NOT NULL,
     idProduto INTEGER NOT NULL,
     idLoja INTEGER NOT NULL,
     quantidade INTEGER NOT NULL,
-    FOREIGN KEY(idCarrinho) REFERENCES Carrinhos(id),
-    FOREIGN KEY(idLoja, idProduto) REFERENCES Produtos(idLoja, id)
-);
- 
-CREATE TABLE Compras
-(
+    FOREIGN KEY (idCarrinho) REFERENCES Carrinhos (idCarrinho),
+    FOREIGN KEY (idLoja, idProduto) REFERENCES Produtos (idLoja, idProduto)
+  );
+
+CREATE TABLE
+  Compras (
     dataHora TIMESTAMP NOT NULL,
     valor FLOAT NOT NULL,
-    PRIMARY KEY(id),
-    FOREIGN KEY(id) REFERENCES Carrinhos(id)
-) INHERITS(Carrinhos);
+    PRIMARY KEY (idCarrinho),
+    FOREIGN KEY (idCarrinho) REFERENCES Carrinhos (idCarrinho)
+  ) INHERITS (Carrinhos);
 
-CREATE TABLE Metodos
-(
-    id INTEGER NOT NULL,
+CREATE TABLE
+  Metodos (
+    idMetodo INTEGER NOT NULL,
     nome VARCHAR(20) NOT NULL,
-    parcelas INTEGER,
-    PRIMARY KEY(id)
-);
+    parcelas INTEGER NOT NULL,
+    PRIMARY KEY (idMetodo)
+  );
 
-CREATE TABLE Pagamentos
-(
+CREATE TABLE
+  Pagamentos (
     idCompra INTEGER NOT NULL,
     foiConfirmado BOOLEAN NOT NULL,
     idMetodo INTEGER NOT NULL,
-    dataHora TIMESTAMP,
-    FOREIGN KEY(idCompra) REFERENCES Compras(id),
-    FOREIGN KEY (idMetodo) REFERENCES Metodos(id),
-    PRIMARY KEY(idCompra)
-);
+    dataHoraPagamento TIMESTAMP NOT NULL,
+    FOREIGN KEY (idCompra) REFERENCES Compras (idCarrinho),
+    FOREIGN KEY (idMetodo) REFERENCES Metodos (idMetodo),
+    PRIMARY KEY (idCompra)
+  );
 
-CREATE TABLE Avaliacoes
-(
+CREATE TABLE
+  Avaliacoes (
     idCliente INTEGER NOT NULL,
-    nota INTEGER NOT NULL,
+    nota SMALLINT NOT NULL,
     comentario TEXT,
-    FOREIGN KEY(idCliente) REFERENCES Clientes(id),
+    FOREIGN KEY (idCliente) REFERENCES Clientes (idUser),
     PRIMARY KEY (idCliente)
-);
+  );
 
-CREATE TABLE AvaliacoesLoja
-(
+CREATE TABLE
+  AvaliacoesLoja (
     idLoja INTEGER NOT NULL,
-    FOREIGN KEY(idLoja) REFERENCES Lojas(id),
-    PRIMARY KEY(idCliente, idLoja)
-) INHERITS(Avaliacoes);
+    FOREIGN KEY (idLoja) REFERENCES Lojas (idLoja),
+    PRIMARY KEY (idCliente, idLoja)
+  ) INHERITS (Avaliacoes);
 
-CREATE TABLE AvaliacoesProduto
-(
+CREATE TABLE
+  AvaliacoesProduto (
     idLojaProduto INTEGER NOT NULL,
     idProduto INTEGER NOT NULL,
-    FOREIGN KEY(idProduto, idLojaProduto) REFERENCES Produtos(id, idLoja),
-    PRIMARY KEY(idCliente, idLojaProduto, idProduto)
-) INHERITS(Avaliacoes);
+    FOREIGN KEY (idProduto, idLojaProduto) REFERENCES Produtos (idProduto, idLoja),
+    PRIMARY KEY (idCliente, idLojaProduto, idProduto)
+  ) INHERITS (Avaliacoes);
+
+ALTER TABLE Metodos ADD CONSTRAINT Metodo_tipos CHECK (nome in ('Credito', 'Debito', 'Pix', 'Boleto'));
+
+ALTER TABLE Metodos
+ALTER COLUMN parcelas
+SET DEFAULT 1;
+
+ALTER TABLE Metodos ADD CONSTRAINT check_parcelas CHECK (
+  (
+    nome <> 'Credito'
+    AND parcelas = 1
+  )
+  OR (
+    nome = 'Credito'
+    AND parcelas >= 1
+    AND parcelas <= 12
+  )
+);
+
+ALTER TABLE Avaliacoes ADD CONSTRAINT check_nota CHECK (
+  nota >= 0
+  AND nota <= 5
+);

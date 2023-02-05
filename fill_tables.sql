@@ -7,7 +7,7 @@ INSERT INTO Clientes VALUES (3,'vcccc','cleber antonio','ca@gmail.com','51999999
 -- Administradores VALUES (id,'senha','nome','email','telefone', 'cnjp');
 INSERT INTO Administradores VALUES (1,'aaaaa','André da Silva','andré@gmail.com','51999999999', '00000000000000');
 INSERT INTO Administradores VALUES (2,'aaaaa','Bruno da Silva','bruno@gmail.com','51999999999', '00000000000000');
-INSERT INTO Administradores VALUES (3,'ccccc','Cleber da Silva','cleber@gmail.com','51999999999', '00000000000000');
+INSERT INTO Administradores VALUES (3,'ccccc','Cleber da Silva','cleber@gmail.com','51999999999', '00000000000002');
 
 -- Lojas VALUES (id, 'nome', 'link', 'fone', 1dAdministrador, 'ramo');
 INSERT INTO Lojas VALUES (1, 'Armazem AAA', 'armazemaa.com.br', '51999999999', 'pilhas');
@@ -45,7 +45,7 @@ INSERT INTO Produtos_Carrinho VALUES(5, 1, 3, 5);
 INSERT INTO Produtos_Carrinho VALUES(6, 2, 1, 5);
 
 -- Compras VALUES (id, idCliente, idLoja, dataHora, valor);
-INSERT INTO Compras VALUES(1, 1, 1, '2021-09-01 00:00:00', 100.00);
+INSERT INTO Compras VALUES(1, 1, 1, NOW(), 100.00);
 INSERT INTO Compras VALUES(2, 1, 2, '2021-09-02 00:00:00', 130.00);
 INSERT INTO Compras VALUES(3, 2, 2, '2021-09-03 00:00:00', 140.00);
 INSERT INTO Compras VALUES(4, 2, 3, '2021-09-03 00:00:00', 20.00);
@@ -53,12 +53,12 @@ INSERT INTO Compras VALUES(5, 3, 3, '2021-09-02 00:00:00', 400.00);
 INSERT INTO Compras VALUES(6, 3, 1, '2021-09-01 00:00:00', 640.00);
 
 -- Metodos VALUES (id, nome, parcelas);
-INSERT INTO Metodos VALUES (1, 'dinheiro', 1);
-INSERT INTO Metodos VALUES (2, 'boleto', 1);
-INSERT INTO Metodos VALUES (3, 'Crédito', 1);
-INSERT INTO Metodos VALUES (4, 'Crédito', 2);
-INSERT INTO Metodos VALUES (5, 'Crédito', 3);
-INSERT INTO Metodos VALUES (6, 'Crédito', 4);
+INSERT INTO Metodos VALUES (1, 'Pix', 1);
+INSERT INTO Metodos VALUES (2, 'Boleto', 1);
+INSERT INTO Metodos VALUES (3, 'Credito', 1);
+INSERT INTO Metodos VALUES (4, 'Credito', 2);
+INSERT INTO Metodos VALUES (5, 'Credito', 3);
+INSERT INTO Metodos VALUES (6, 'Credito', 4);
 
 -- Pagamentos VALUES (idCompra, foiConfirmado, idMetodo, dataHora);
 INSERT INTO Pagamentos VALUES (1, TRUE, 1, '2021-10-01 00:00:00');
@@ -66,17 +66,17 @@ INSERT INTO Pagamentos VALUES (3, TRUE, 3, '2021-10-01 00:00:00');
 INSERT INTO Pagamentos VALUES (6, TRUE, 2, '2021-10-01 00:00:00');
 
 -- AvaliacoesLoja VALUES (idCliente, nota, 'comentario', idLoja);
-INSERT INTO AvaliacoesLoja VALUES (1, 7.0, 'mediana', 1);
-INSERT INTO AvaliacoesLoja VALUES (1, 8.0, 'boa', 2);
-INSERT INTO AvaliacoesLoja VALUES (2, 4.0, 'media', 1);
-INSERT INTO AvaliacoesLoja VALUES (2, 5.0, 'mediana', 3);
-INSERT INTO AvaliacoesLoja VALUES (3, 2.0, 'pessima', 3);
-INSERT INTO AvaliacoesLoja VALUES (3, 10.0, 'excelente', 2);
+INSERT INTO AvaliacoesLoja VALUES (1, 3.0, 'mediana', 1);
+INSERT INTO AvaliacoesLoja VALUES (1, 4.0, 'boa', 2);
+INSERT INTO AvaliacoesLoja VALUES (2, 3.0, 'media', 1);
+INSERT INTO AvaliacoesLoja VALUES (2, 3.0, 'mediana', 3);
+INSERT INTO AvaliacoesLoja VALUES (3, 1.0, 'pessima', 3);
+INSERT INTO AvaliacoesLoja VALUES (3, 5.0, 'excelente', 2);
 
 -- AvaliacoesProduto VALUES (idCliente, nota, 'comentario', idLojaProduto, idProduto);
-INSERT INTO AvaliacoesProduto VALUES (1, 7.0, 'mediana', 1, 1);
-INSERT INTO AvaliacoesProduto VALUES (1, 8.0, 'boa', 2, 1);
-INSERT INTO AvaliacoesProduto VALUES (2, 4.0, 'media', 1, 2);
-INSERT INTO AvaliacoesProduto VALUES (2, 5.0, 'mediana', 3, 1);
-INSERT INTO AvaliacoesProduto VALUES (3, 2.0, 'pessima', 3, 1);
-INSERT INTO AvaliacoesProduto VALUES (3, 10.0, 'excelente', 2, 1);
+INSERT INTO AvaliacoesProduto VALUES (1, 3.0, 'mediana', 1, 1);
+INSERT INTO AvaliacoesProduto VALUES (1, 4.0, 'boa', 2, 1);
+INSERT INTO AvaliacoesProduto VALUES (2, 3.0, 'media', 1, 2);
+INSERT INTO AvaliacoesProduto VALUES (2, 3.0, 'mediana', 3, 1);
+INSERT INTO AvaliacoesProduto VALUES (3, 1.0, 'pessima', 3, 1);
+INSERT INTO AvaliacoesProduto VALUES (3, 5.0, 'excelente', 2, 1);
