@@ -10,7 +10,7 @@
 
 1. Escolher uma realidade para modelar e apresentar as simplificações de forma clara.  
 2. Criar esquema ER que contenha:  
-    - [X] 10 entidades, coectadas com pelo menos 1 relacionamento;
+    - [x] 10 entidades, coectadas com pelo menos 1 relacionamento;
     - [X] 2 relacionamentos com cardinalidade n-m. Pelo menos 1 destes deve ter. atributos;
     - [X] entidades ligadas por uma hierarquia **relevante** de especialização.
 3.  Uso de soluções que envolvam elaboração de diagramas e descrições textuais, o uso de ferramentas CASE é opcional.
