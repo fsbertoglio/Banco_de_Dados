@@ -10,12 +10,12 @@
 
 1. Escolher uma realidade para modelar e apresentar as simplificações de forma clara.  
 2. Criar esquema ER que contenha:  
-    - [ ] 10 entidades, coectadas com pelo menos 1 relacionamento;
+    - [x] 10 entidades, coectadas com pelo menos 1 relacionamento;
     - [ ] 2 relacionamentos com cardinalidade n-m. Pelo menos 1 destes deve ter. atributos;
     - [ ] entidades ligadas por uma hierarquia **relevante** de especialização.
 3.  Uso de soluções que envolvam elaboração de diagramas e descrições textuais, o uso de ferramentas CASE é opcional.
 4. Entregáveis:
     - [ ] Documento PDF: Documento com Descrição em Português do UdD, onde conste claramente a URL do site que serviu como inspiração;
-    - [ ] Documento PDF: Diagrama ER; 
+    - [x] Documento PDF: Diagrama ER; 
     - [ ] Documento PDF: Dicionário de dados: descrição do significado de cada entidade/relacionamento/atributo, o domínio dos atributos, todas restrições de integridade não expressas no diagrama, bem como qualquer anotação;pertinente. Esta descrição deve agregar valor e complementar a representação diagramática;
-    - [ ] Arquivo (opcional): Caso use uma ferramenta de projeto, o arquivo da modelagem nesta ferramenta.
+    - [x] Arquivo (opcional): Caso use uma ferramenta de projeto, o arquivo da modelagem nesta ferramenta.
