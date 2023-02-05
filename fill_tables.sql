@@ -6,7 +6,7 @@ INSERT INTO Clientes VALUES (3,'vcccc','cleber antonio','ca@gmail.com','51999999
 
 -- Administradores VALUES (id,'senha','nome','email','telefone', 'cnjp');
 INSERT INTO Administradores VALUES (1,'aaaaa','André da Silva','andré@gmail.com','51999999999', '00000000000000');
-INSERT INTO Administradores VALUES (2,'aaaaa','Bruno da Silva','bruno@gmail.com','51999999999', '00000000000001');
+INSERT INTO Administradores VALUES (2,'aaaaa','Bruno da Silva','bruno@gmail.com','51999999999', '00000000000000');
 INSERT INTO Administradores VALUES (3,'ccccc','Cleber da Silva','cleber@gmail.com','51999999999', '00000000000002');
 
 -- Lojas VALUES (id, 'nome', 'link', 'fone', 1dAdministrador, 'ramo');

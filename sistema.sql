@@ -15,7 +15,7 @@ CREATE TABLE
 
 CREATE TABLE
   Administradores (
-    cnpj char(14) NOT NULL UNIQUE,
+    cnpj char(14) NOT NULL,
     PRIMARY KEY (idUser)
   ) INHERITS (Usuarios);
 
