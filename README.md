@@ -26,6 +26,6 @@
 1. Crie um esquema relacional correspondente ao seu esquema conceitual. As tabelas devem possuir chave primária, e quando for o caso, chaves alternativas e chaves estrangeiras. Estabeleça as demais restrições de acordo com os recursos de SQL vistos em aula (e.g. Check).  
 2. Instancie suas tabelas, baseado em exemplos reais de sua inspiração, ou exemplos fictícios, mas factíveis. Cada tabela deve ter no mínimo 3 instâncias, salvo se no UdD isto não fizer sentido.
 3.  Entregáveis:
-    - [ ] o Documento PDF: Explicação do mapeamento feito, o qual deve descrever as regras de transformação aplicadas
+    - [x] o Documento PDF: Explicação do mapeamento feito, o qual deve descrever as regras de transformação aplicadas
     sobre o esquema ER para derivação do esquema relacional correspondente. Neste conjunto de regras, deve fica claro como cada entidade, relacionamento, atributo foi transformado em elementos do modelo relacional, e o porqu da estratégia escolhida. Justifique a escolha das chaves primárias. Mostre como restrições foram implantadas quando pertinente. Justifique a estratégia escolhida para mapeamento da hierarquia de especialização.
     - [x] Arquivo .sql com os comandos de criação e instanciação das tabelas.
