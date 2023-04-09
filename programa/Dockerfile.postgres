@@ -1,8 +1,9 @@
 FROM postgres:13-alpine
 
-ENV POSTGRES_USER=myuser \
+ENV POSTGRES_USER=postgres \
     POSTGRES_PASSWORD=mypassword \
-    POSTGRES_DB=mydb
+    POSTGRES_DB=postgres
 
+EXPOSE 5432
 COPY instancias.sql /docker-entrypoint-initdb.d/
 

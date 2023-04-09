@@ -1,16 +1,14 @@
 version: "3.9"
 services:
-  api:
-   build: api/
-   ports:
-     - 8000:8000
   db:
     build:
       context: .
       dockerfile: Dockerfile.postgres
     ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+      - 5432:5432
+  api:
+   build: api/
+   ports:
+     - 8000:8000
+   depends_on:
+     - db
