@@ -1,6 +1,7 @@
 -- !
-DROP SCHEMA public CASCADE;
+DROP SCHEMA IF EXISTS public  CASCADE;
 CREATE SCHEMA public;
+
 CREATE TABLE Usuarios (
   idUser INTEGER NOT NULL,
   senha CHAR(32) NOT NULL,
@@ -103,7 +104,7 @@ CREATE TABLE Metodos (
 
 CREATE TABLE Compras (
   dataHora TIMESTAMP NOT NULL,
-  valor FLOAT NOT NULL,
+  valor FLOAT NOT NULL DEFAULT 0,
   idMetodo INTEGER NOT NULL  DEFAULT 1,
   PRIMARY KEY (idCarrinho),
   FOREIGN KEY (idCarrinho) REFERENCES Carrinhos (idCarrinho),
@@ -151,3 +152,70 @@ CREATE TABLE AvaliacoesProduto (
     idProduto
   )
 ) INHERITS (Avaliacoes);
+
+-- 2.a) Visão Útil  ##################
+-- View para facilitar visão das notas atribuidas a cada loja
+CREATE OR REPLACE VIEW Visao_Avaliacoes_Produtos AS
+    SELECT DISTINCT P.idproduto, P.idloja, avg(ap.nota) mediaAvaliacoes, COUNT(ap.nota) numAvaliacoes
+    FROM avaliacoesproduto ap
+      JOIN produtos P ON p.idproduto = ap.idproduto
+	GROUP BY P.idproduto, P.idloja;
+
+  --Visão FInal co informações completas das avaliações
+CREATE OR REPLACE VIEW Visao_Geral_Produtos AS
+  SELECT DISTINCT P.idloja, P.idproduto, P.nome nome_produto, L.nome nome_loja, P.descricao, P.valor, P.quantidade, P.categoria, VAP.mediaavaliacoes, VAP.numavaliacoes
+    FROM produtos P
+      JOIN lojas L ON L.idloja = P.idloja
+      JOIN Visao_Avaliacoes_Produtos VAP ON (P.idproduto = VAP.idproduto AND P.idloja = VAP.idloja);
+
+
+-- 2.c) DEFINIÇÃO DE PROCEDURE > TRIGGER + FUNCTION ##################
+
+-- 1. Definição de uma função de inserção automatica na tabela Pagamentos à medida que uma compra é realizada, usando as informação provenientes da compra.
+CREATE OR REPLACE FUNCTION insere_pagamento() RETURNS TRIGGER AS $$
+DECLARE
+  id_compra INTEGER;
+BEGIN
+  id_compra := NEW.idcarrinho;
+  INSERT INTO Pagamentos (idCompra, foiConfirmado, dataHoraPagamento)
+  VALUES (id_compra, false, NULL);
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+  -- 1.1. Trigger
+CREATE OR REPLACE TRIGGER cria_pagamento AFTER INSERT ON Compras
+FOR EACH ROW EXECUTE PROCEDURE insere_pagamento();
+
+-- 2. Definição de uma função que atualiza o valor da compra com base no custo dos produtos e quantidade.
+CREATE OR REPLACE FUNCTION atualiza_valor_compra() 
+RETURNS TRIGGER AS $$
+DECLARE 
+  valor_compra FLOAT;
+BEGIN
+  SELECT SUM(P.valor * P_C.quantidade) INTO valor_compra
+  FROM Produtos_Carrinho P_C
+  JOIN Produtos P ON (P.idProduto = P_C.idProduto AND P.idLoja = P_C.idLoja)
+  WHERE P_C.idCarrinho = NEW.idCarrinho;
+
+  UPDATE Compras SET valor = valor_compra WHERE idCarrinho = NEW.idCarrinho;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+  -- 2.1. Trigger
+CREATE OR REPLACE TRIGGER atualiza_valor AFTER INSERT ON Compras
+FOR EACH ROW EXECUTE PROCEDURE atualiza_valor_compra();
+
+-- 3. Definição de uma função que confirma o pagamento de uma compra.
+CREATE OR REPLACE FUNCTION confirma_pagamento(id_compra INTEGER)
+RETURNS INTEGER AS $$
+DECLARE 
+  sel_id_compra INTEGER;
+BEGIN  
+  sel_id_compra = id_compra;
+  UPDATE Pagamentos SET foiConfirmado = true, dataHoraPagamento = NOW()
+  WHERE idCompra = sel_id_compra;
+RETURN 1;
+END;
+$$ LANGUAGE plpgsql;

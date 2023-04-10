@@ -1,18 +1,3 @@
--- 2.a) Visão Útil  ##################
--- View para facilitar visão das notas atribuidas a cada loja
-CREATE OR REPLACE VIEW Visao_Avaliacoes_Produtos AS
-    SELECT DISTINCT P.idproduto, P.idloja, avg(ap.nota) mediaAvaliacoes, COUNT(ap.nota) numAvaliacoes
-    FROM avaliacoesproduto ap
-      JOIN produtos P ON p.idproduto = ap.idproduto
-	GROUP BY P.idproduto, P.idloja;
-
-  --Visão FInal co informações completas das avaliações
-CREATE OR REPLACE VIEW Visao_Geral_Produtos AS
-  SELECT DISTINCT P.idloja, P.idproduto, P.nome nome_produto, L.nome nome_loja, P.descricao, P.valor, P.quantidade, P.categoria, VAP.mediaavaliacoes, VAP.numavaliacoes
-    FROM produtos P
-      JOIN lojas L ON L.idloja = P.idloja
-      JOIN Visao_Avaliacoes_Produtos VAP ON (P.idproduto = VAP.idproduto AND P.idloja = VAP.idloja);
-
 -- 2.b) CONSULTAS PARA A PARTE 2 DO TRABALHO FINAL ##################
 -- 1. buscar administrador por id e as Lojas que ele administra
 SELECT DISTINCT A.nome nome_administrador, AL.idloja, L.nome nome_administrador

@@ -146,8 +146,6 @@ INSERT INTO Produtos VALUES (3, 10, 'Dipirona', 30, 'Medicamento', 4.00, 'Analg�
 INSERT INTO Produtos VALUES (4, 10, 'Omeprazol', 20, 'Medicamento', 8.00, 'Inibidor de bomba de prótons para tratamento de úlceras', NULL, 'Cápsula');
 INSERT INTO Produtos VALUES (5, 10, 'Fluconazol', 10, 'Medicamento', 12.00, 'Antifúngico', NULL, 'Cápsula');
 
-
-
 -- Carrinhos VALUES (id, idCliente, idLoja);
 INSERT INTO Carrinhos VALUES (1, 1, 1);
 INSERT INTO Carrinhos VALUES (2, 1, 2);
@@ -200,49 +198,28 @@ INSERT INTO Metodos VALUES (4, 'Credito', 2);
 INSERT INTO Metodos VALUES (5, 'Credito', 3);
 INSERT INTO Metodos VALUES (6, 'Credito', 4);
 
--- Compras VALUES (id, idCliente, idLoja, dataHora, valor, metodo);
-INSERT INTO Compras VALUES(1, 1, 1, '2022-11-06 05:37:19', 140.00, 3);
-INSERT INTO Compras VALUES(2, 1, 2, '2022-05-18 11:25:46', 130.00, 4);
-INSERT INTO Compras VALUES(3, 2, 2, '2022-11-06 05:37:19', 140.00, 3);
-INSERT INTO Compras VALUES(4, 2, 3, '2023-02-17 14:40:03', 20.00, 2);
-INSERT INTO Compras VALUES(5, 3, 3, '2023-01-05 09:53:50', 400.00, 3);
-INSERT INTO Compras VALUES(6, 3, 1, '2022-08-26 16:01:58', 640.00, 5);
-INSERT INTO Compras VALUES(7, 4, 5, '2022-04-28 21:48:31', 100.00, 5);
-INSERT INTO Compras VALUES(8, 4, 6, '2023-01-22 23:02:23', 150.00, 5);
-INSERT INTO Compras VALUES(9, 5, 7, '2022-06-15 13:19:36', 50.00, 2);
-INSERT INTO Compras VALUES(10, 5, 8, '2021-09-03 00:00:00', 70.00, 4);
-INSERT INTO Compras VALUES(11, 6, 8, '2022-03-23 19:52:41', 80.00, 6);
-INSERT INTO Compras VALUES(12, 6, 9, '2023-01-11 05:41:56', 90.00, 6);
-INSERT INTO Compras VALUES(13, 7, 10, '2021-09-01 00:00:00', 110.00);
-INSERT INTO Compras VALUES(14, 7, 2, '2023-02-11 03:17:18', 120.00);
-INSERT INTO Compras VALUES(15, 8, 3, '2023-03-27 07:09:04', 130.00);
-INSERT INTO Compras VALUES(16, 8, 4, '2022-10-05 15:13:41', 140.00);
-INSERT INTO Compras VALUES(17, 9, 5, '2023-03-27 07:09:04', 150.00);
-INSERT INTO Compras VALUES(18, 9, 6, '2022-10-05 15:13:41', 160.00);
-INSERT INTO Compras VALUES(19, 10, 7, '2022-03-23 19:52:41', 170.00);
-INSERT INTO Compras VALUES(20, 10, 8, '2023-01-11 05:41:56', 180.00);
-
--- Pagamentos VALUES (idCompra, foiConfirmado, dataHora);
-INSERT INTO Pagamentos VALUES (1, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (2, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (3, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (4, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (5, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (6, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (7, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (8, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (9, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (10, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (11, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (12, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (13, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (14, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (15, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (16, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (17, FALSE, NULL);
-INSERT INTO Pagamentos VALUES (18, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (19, TRUE, '2021-10-01 00:00:00');
-INSERT INTO Pagamentos VALUES (20, TRUE, '2021-10-01 00:00:00');
+-- Compras VALUES (id, idCliente, idLoja, dataHora, metodo);
+INSERT INTO Compras VALUES(1, 1, 1, NOW(), 140.00);
+INSERT INTO Compras VALUES(2, 1, 2, NOW(), 130.00);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(3, 2, 2, NOW(),0, 3);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(4, 2, 3, NOW(), 20.00, 2);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(5, 3, 3, NOW(), 400.00, 3);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(6, 3, 1, NOW(), 640.00, 5);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(7, 4, 5, NOW(), 100.00, 5);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(8, 4, 6, NOW(), 150.00, 5);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(9, 5, 7, NOW(), 50.00, 2);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(10, 5, 8, NOW(), 70.00, 4);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(11, 6, 8, NOW(), 80.00, 6);
+INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor, idmetodo) VALUES(12, 6, 9, NOW(), 90.00, 6);
+    -- USAR PARA DEMONSTRAR FUNÇÕES DE TRIGGER
+--INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor) VALUES(13, 7, 10, NOW(), 110.00);
+--INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor) VALUES(14, 7, 2, NOW(), 120.00);
+--INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor) VALUES(15, 8, 3, NOW(), 130.00);
+--INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor) VALUES(16, 8, 4, NOW(), 140.00);
+--INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor) VALUES(17, 9, 5, NOW(), 150.00);
+--INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor) VALUES(18, 9, 6, NOW(), 160.00);
+--INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor) VALUES(19, 10, 7, NOW(), 170.00);
+--INSERT INTO Compras (idcarrinho, idCliente, idLoja, dataHora, valor) VALUES(20, 10, 8, NOW(), 180.00);
 
 -- AvaliacoesLoja VALUES (idCliente, nota, 'comentario', idLoja);
 INSERT INTO AvaliacoesLoja VALUES (1, 3.0, 'mediana', 1);
