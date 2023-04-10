@@ -39,7 +39,7 @@ SELECT DISTINCT Cli.iduser, cli.nome nome_cliente, Pendentes.idCarrinho, Pendent
     JOIN Pagamentos Pag ON Com.idCarrinho = Pag.idCompra
     WHERE Pag.foiConfirmado = false
   ) AS Pendentes ON Pendentes.idCliente = Cli.idUser
-  WHERE Cli.idUser = 1; --PARAMETRO
+  WHERE Cli.idUser = 2; --PARAMETRO
 
 -- 6. Listar vendas de um uma loja (pode colocar filtros por mês, ano, etc)
 SELECT DISTINCT L.idloja, L.nome nome_loja, Conf.idCarrinho, Conf.datahora, Conf.valor, conf.dataHoraPagamento
@@ -61,7 +61,7 @@ SELECT DISTINCT L.idloja, L.nome nome_loja, SUM(Conf.valor) lucro
     JOIN Pagamentos Pag ON Com.idCarrinho = Pag.idCompra
       WHERE Pag.foiConfirmado = true
   ) AS conf ON Conf.idloja = L.idloja
-  WHERE L.idloja = 8 --PARAMETRO
+  -- WHERE L.idloja = 8 --PODEMOS POR PARAMETRO E SELECIONAR UMA LOJA
   GROUP BY L.idloja, L.nome;
 
 -- 8. Listar clientes devedores de uma loja (que tem compras não confirmadas)
@@ -74,22 +74,28 @@ SELECT DISTINCT L.idloja, L.nome nome_loja, Cli.iduser, Cli.nome nome_cliente, P
       WHERE Pag.foiConfirmado = false
   ) AS Pendentes ON Pendentes.idloja = L.idloja
   JOIN Clientes Cli ON Cli.idUser = Pendentes.idCliente
-  WHERE L.idloja = 8; --PARAMETRO
+  WHERE L.idloja = 2; --PARAMETRO
 
 
 -- 9. Listar produtos mais vendidos de uma loja (pode colocar filtros por mês, ano, etc)
 SELECT DISTINCT L.idloja, L.nome nome_loja, Prod.idproduto, Prod.nome nome_produto, SUM(Prod.quantidade) quantidade_vendida
   FROM Lojas L
   JOIN (
-    SELECT DISTINCT Com.idloja, Prod.idproduto, Prod.nome, Prod.quantidade
-    FROM Compras Com
-    JOIN Produtos Prod ON Com.idCarrinho = Prod.idCarrinho
+SELECT Com.idCarrinho, com.idcliente, Com.idloja, Prod.idproduto, Prod.nome, PD.quantidade
+    FROM Produtos_Carrinho PD
+    JOIN Produtos Prod ON (PD.idloja = Prod.idloja and PD.idproduto = Prod.idproduto)
+    JOIN Compras Com ON Com.idCarrinho = PD.idCarrinho
   ) AS Prod ON Prod.idloja = L.idloja
-  WHERE L.idloja = 8 --PARAMETRO
+  WHERE L.idloja = 1 -- PODEMOS POR PARAMETRO E SELECIONAR UMA LOJA
   GROUP BY L.idloja, L.nome, Prod.idproduto, Prod.nome
-  ORDER BY quantidade_vendida DESC;
+  ORDER BY L.idloja, quantidade_vendida DESC; --Usado quando o objetivo for ver todas as lojas
 
--- 9. Listar clientes de uma loja (que tem compras confirmadas) e que não realizaram avaliação
+SELECT Com.idCarrinho, com.idcliente, Com.idloja, Prod.idproduto, Prod.nome, PD.quantidade
+    FROM Produtos_Carrinho PD
+    JOIN Produtos Prod ON (PD.idloja = Prod.idloja and PD.idproduto = Prod.idproduto)
+    JOIN Compras Com ON Com.idCarrinho = PD.idCarrinho
+
+-- 10. Listar clientes de uma loja (que tem compras confirmadas) e que não realizaram avaliação
 SELECT DISTINCT L.idloja, L.nome nome_loja, Cli.iduser, Cli.nome nome_cliente, confirmadas.idCarrinho idCompra, confirmadas.datahora, confirmadas.valor
   FROM Lojas L
   JOIN (
