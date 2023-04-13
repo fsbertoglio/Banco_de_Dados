@@ -33,14 +33,14 @@ async def shutdown_event():
 @app.get('/admin')
 async def get_admin(idAdmin: int):
     result = db.execute(
-        f'''
+        '''
 SELECT DISTINCT A.nome nome_administrador, AL.idloja, L.nome nome_administrador
 FROM Administradores_Lojas AL
 JOIN Administradores A ON A.idUser = AL.idadministrador
 JOIN Lojas L ON L.idloja = AL.idloja
-WHERE AL.idadministrador = {idAdmin}
+WHERE AL.idadministrador = %s
 ORDER BY AL.idloja;
-            '''
+            ''', (idAdmin,)
     )
     lojas = []
     for row in result:
@@ -58,8 +58,7 @@ FROM Administradores_Lojas AL
 JOIN Administradores A ON A.idUser = AL.idAdministrador
 JOIN Lojas L ON L.idloja = AL.idloja
 WHERE L.nome like '%{nomeLoja}%'
-ORDER BY A.idUser;            '''
-    )
+ORDER BY A.idUser;''')
     admins = []
     for row in result:
         admins.append(
@@ -71,13 +70,13 @@ ORDER BY A.idUser;            '''
 @app.get('/compras-cliente')
 async def get_compras_cliente(idCliente: int):
     result = db.execute(
-        f'''
+        '''
 SELECT DISTINCT Cli.iduser, Cli.nome nome_cliente,
 Com.idCarrinho, Com.datahora, Com.valor, Pag.foiConfirmado, Pag.dataHoraPagamento
 FROM Clientes Cli
 JOIN Compras Com ON Com.idCliente = Cli.idUser
 JOIN Pagamentos Pag ON Com.idCarrinho = Pag.idCompra
-where Cli.idUser = {idCliente};'''
+where Cli.idUser = %s;''', (idCliente,)
     )
     compras = []
     for row in result:
@@ -93,13 +92,13 @@ where Cli.idUser = {idCliente};'''
 @app.get('/avaliacoes-cliente')
 async def get_avaliacoes_cliente(idCliente: int):
     result = db.execute(
-        f'''
+        '''
 SELECT DISTINCT Cli.iduser, Cli.nome nome_cliente, AL.idloja, L.nome nome_loja, AL.nota, AL.comentario
 FROM Clientes Cli
 JOIN AvaliacoesLoja AL ON AL.idCliente = Cli.idUser
 JOIN Lojas L ON L.idloja = AL.idloja
-WHERE Cli.idUser = {idCliente};
-        '''
+WHERE Cli.idUser = %s;
+        ''', (idCliente,)
     )
     avaliacoes = []
     for row in result:
@@ -116,7 +115,7 @@ WHERE Cli.idUser = {idCliente};
 @app.get('/pendente-cliente')
 async def get_pendente_cliente(idCliente: int):
     result = db.execute(
-        f'''
+        '''
 SELECT DISTINCT Cli.iduser, cli.nome nome_cliente, Pendentes.idCarrinho, L.nome nome_loja, Pendentes.valor, Pendentes.datahora Data_compra
 FROM Clientes Cli
 JOIN (
@@ -127,8 +126,8 @@ JOIN (
 ) AS Pendentes
 JOIN Lojas L ON L.idloja = Pendentes.idloja
 ON Pendentes.idCliente = Cli.idUser
-WHERE Cli.iduser ={idCliente} ;
-        '''
+WHERE Cli.iduser =%s ;
+        ''',(idCliente,)
     )
     pendentes = []
     for row in result:
@@ -143,7 +142,7 @@ WHERE Cli.iduser ={idCliente} ;
 @app.get('/vendas-loja')
 async def get_vendas_loja(idLoja: int):
     result = db.execute(
-        f'''
+        '''
 SELECT DISTINCT L.idloja, L.nome nome_loja, Conf.idCarrinho, Conf.datahora, Conf.valor, conf.dataHoraPagamento
 FROM Lojas L
 JOIN (
@@ -152,8 +151,8 @@ FROM Compras Com
 JOIN Pagamentos Pag ON Com.idCarrinho = Pag.idCompra
 WHERE Pag.foiConfirmado = true
 ) AS conf ON Conf.idloja = L.idloja
-  WHERE L.idloja = {idLoja};
-        '''
+  WHERE L.idloja = %s;
+        ''',(idLoja,)
     )
     vendas = []
     for row in result:
@@ -169,7 +168,7 @@ WHERE Pag.foiConfirmado = true
 @app.get('/lucro-loja')
 async def get_lucro_loja(idLoja: int):
     result = db.execute(
-        f'''
+        '''
 SELECT DISTINCT L.idloja, L.nome nome_loja, SUM(Conf.valor) lucro
   FROM Lojas L
   JOIN (
@@ -178,9 +177,9 @@ SELECT DISTINCT L.idloja, L.nome nome_loja, SUM(Conf.valor) lucro
     JOIN Pagamentos Pag ON Com.idCarrinho = Pag.idCompra
       WHERE Pag.foiConfirmado = true
   ) AS conf ON Conf.idloja = L.idloja
-  WHERE L.idloja = {idLoja}
+  WHERE L.idloja = %s
   GROUP BY L.idloja, L.nome;
-        '''
+        ''',(idLoja,)
     )
     lucro = []
     for row in result:
@@ -195,7 +194,7 @@ SELECT DISTINCT L.idloja, L.nome nome_loja, SUM(Conf.valor) lucro
 @app.get('/clientes-devedores')
 async def get_clientes_devedores(idLoja: int):
     result = db.execute(
-        f'''
+        '''
 SELECT DISTINCT L.idloja, L.nome nome_loja, Cli.iduser, Cli.nome nome_cliente, Pendentes.idCarrinho, Pendentes.datahora, Pendentes.valor
   FROM Lojas L
   JOIN (
@@ -205,8 +204,8 @@ SELECT DISTINCT L.idloja, L.nome nome_loja, Cli.iduser, Cli.nome nome_cliente, P
       WHERE Pag.foiConfirmado = false
   ) AS Pendentes ON Pendentes.idloja = L.idloja
   JOIN Clientes Cli ON Cli.idUser = Pendentes.idCliente
-  WHERE L.idloja = {idLoja};
-        '''
+  WHERE L.idloja = %s;
+        ''',(idLoja,)
     )
     devedores = []
     for row in result:
@@ -285,19 +284,19 @@ async def get_clientes_sem_avaliacao(idLoja: int = -1):
 @app.get('/melhores-lojas')
 async def get_melhores_lojas(categoria: object):
     result = db.execute(
-        f'''
+        '''
   SELECT L.idloja, L.nome, AVG(AL.nota) media
     FROM Lojas L
     JOIN AvaliacoesLoja AL ON AL.idloja = L.idloja
     JOIN (
       SELECT Prod.idloja, Prod.idproduto, Prod.nome, Prod.categoria, Prod.valor
       FROM Produtos Prod
-      WHERE Prod.categoria = '{categoria}'
+      WHERE Prod.categoria = %s
     ) AS Prod ON Prod.idloja = L.idloja
     GROUP BY L.idloja, L.nome
     HAVING AVG(AL.nota) >= 3
     ORDER BY AVG(AL.nota) DESC;
-        ''')
+        ''', (categoria,))
     lojas = []
     for row in result:
         lojas.append(
@@ -311,12 +310,12 @@ async def get_melhores_lojas(categoria: object):
 @app.get('/melhores-produtos')
 async def get_melhores_produtos(idLoja: int):
     result = db.execute(
-        f'''
+        '''
   SELECT *
     FROM Visao_Geral_Produtos
-    WHERE mediaAvaliacoes >= 3 AND idloja = {idLoja}
+    WHERE mediaAvaliacoes >= 3 AND idloja = %s
     ORDER BY mediaAvaliacoes DESC;
-        ''')
+        ''', (idLoja,))
     produtos = []
     for row in result:
         produtos.append(
@@ -334,12 +333,12 @@ async def get_melhores_produtos(idLoja: int):
 @app.get('/ordenar-produtos')
 async def get_produtos_ordenados(idLoja: int):
     result = db.execute(
-        f'''
+        '''
           SELECT *
     FROM Visao_Geral_Produtos
-    WHERE idloja = {idLoja}
+    WHERE idloja = %s
     ORDER BY valor ASC;
-        ''')
+        ''',(idLoja,))
     produtos = []
     for row in result:
         produtos.append(
@@ -356,5 +355,5 @@ async def get_produtos_ordenados(idLoja: int):
 
 @app.get('/confirma-pagamento')
 async def confirma_pagamento(idCompra: int):
-    db.execute(f''' SELECT confirma_pagamento({idCompra});''')
+    db.execute(''' SELECT confirma_pagamento(%s);''', (idCompra,))
     return {'Status': 'Confirmado'}
